@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "/toxM9dUoD+EPdLlT+mcGozL19UJ1z3ejl/bxMvuns3c6uceBtdYZSK5xnSl0psSUzebT8RJDASDQt9vjr5uGw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\kevin\\Desktop\\webstockcalculator\\WebCalculator\\WebCalculator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kevin\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

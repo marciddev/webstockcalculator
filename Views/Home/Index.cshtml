@@ -1,0 +1,145 @@
+﻿<!doctype html>
+@model ApiModel
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>Stock Calculations</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            padding: 10px;
+            margin-top: 70px;
+        }
+
+        .grid-item {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            font-size: 30px;
+            text-align: center;
+        }
+        body {
+        }
+
+        #slider-range {
+            margin: 0 auto;
+            margin-top: 200px;
+            width: 2000px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        #amount, #pstyle {
+            border: none;
+            text-align: center;
+        }
+
+        #mainDiv {
+            border: 1px solid black;
+            height: 100px;
+            width: 500px;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+
+        #compare, #lockin {
+            text-align: center;
+            margin-top: 75px;
+            margin-left: 600px;
+            height: 65px;
+            width: 165px;
+        }
+        #lockin {
+            margin-left: 390px;
+        }
+        form, form * {
+            display: inline-block;
+        }
+    </style>
+    <script>
+        $(function () {
+            var multiple = 0;
+            var upper = 1;
+            var lower = 0;
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 365,
+                //values: [Cookies.get("lowerInt"), Cookies.get("upperInt")],
+                values: [$.cookie('lowerInt') || lower, $.cookie('upperInt') || upper],
+                step: 1,
+                slide: function (event, ui) {
+                    console.log("clicked button1");
+                    $("#amount").val("" + ui.values[0] + " - " + ui.values[1]);
+                    multiple = ui.values[1] - ui.values[0];
+                    upper = ui.values[1];
+                    lower = ui.values[0];
+                    
+                    $.cookie('upperInt', upper);
+                    $.cookie('lowerInt', lower);
+                    $("#form").attr("action", ("/" + upper + "/" + lower));
+                }
+            });
+            $("#amount").val("" + $("#slider-range").slider("values", 0) +
+                " - " + $("#slider-range").slider("values", 1));
+            
+            $("#lockin").click(function () {
+                $("#slider-range").slider({
+                    step: multiple,//this is the difference between the values in the initial declaration of the slider ($"#slider-range").slider 
+                    min: 0,
+                    max: 3650,
+                    slide: function (event, ui) {
+                        $("#amount").val("" + ui.values[0] + " - " + ui.values[1]);//this is the two numbers constantly changing when the slider changes at the top of page
+                        $.cookie('upperInt', upper);
+                        $.cookie('lowerInt', lower);
+                    }
+                });
+
+
+            });
+        });
+        
+        
+    </script>
+</head>
+
+<body>
+    <div id="mainDiv">
+        <p style="margin: 0 auto;">Please select a range to compare from(recent - past)</p>
+        <p><input type="text" id="amount" readonly style="border:0; font-weight:bold;margin: 0 auto;"></p>
+    </div>
+
+    <div id="slider-range"></div>
+
+    <form id="form" method="post" action="/">
+        <input type="submit" id="compare" class="btn btn-primary" value="compare values" />
+    </form>
+    <button id="lockin" class="btn btn-success">Lock-In</button>
+
+
+    <div class="grid-container">
+        <div class="grid-item">@Model.IVE</div>
+        <div class="grid-item">@Model.IVV</div>
+        <div class="grid-item">@Model.IVW</div>
+        <div class="grid-item">@Model.IJJ</div>
+        <div class="grid-item">@Model.IJH</div>
+        <div class="grid-item">@Model.IJK</div>
+        <div class="grid-item">@Model.IWN</div>
+        <div class="grid-item">@Model.IWM</div>
+        <div class="grid-item">@Model.IWO</div>
+    </div>
+
+</body>
+</html>
