@@ -54,16 +54,27 @@ namespace WebCalculator.Controllers
                     return returnObj;
                 }
             }
-            YahooModel IVE = await grabData("ive");
-            YahooModel IVV = await grabData("ivv");
-            YahooModel IVW = await grabData("ivw");
-            YahooModel IJJ = await grabData("ijj");
-            YahooModel IJH = await grabData("ijh");
-            YahooModel IJK = await grabData("ijk");
-            YahooModel IWN = await grabData("iwn");
-            YahooModel IWM = await grabData("iwm");
-            YahooModel IWO = await grabData("iwo");
+            var IVEt = grabData("ive");
+            var IVVt = grabData("ivv");
+            var IVWt = grabData("ivw");
+            var IJJt = grabData("ijj");
+            var IJHt = grabData("ijh");
+            var IJKt = grabData("ijk");
+            var IWNt = grabData("iwn");
+            var IWMt = grabData("iwm");
+            var IWOt = grabData("iwo");
             
+            await Task.WhenAll(IVEt, IVVt, IVWt, IJJt, IJHt, IJKt, IWNt, IWMt, IWOt);
+            YahooModel IVE = IVEt.Result;
+            YahooModel IVV = IVVt.Result;
+            YahooModel IVW = IVWt.Result;
+            YahooModel IJJ = IJJt.Result;
+            YahooModel IJH = IJHt.Result;
+            YahooModel IJK = IJKt.Result;
+            YahooModel IWN = IWNt.Result;
+            YahooModel IWM = IWMt.Result;
+            YahooModel IWO = IWOt.Result;
+
 
             String percentChange(YahooModel m)
             {
