@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using WebCalculator.Models;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace WebCalculator.Controllers
 {
@@ -22,6 +23,7 @@ namespace WebCalculator.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.low = 0;
             ApiModel m = new ApiModel()
             {
                 IVE = "0",
@@ -412,7 +414,6 @@ namespace WebCalculator.Controllers
                     Console.WriteLine("inside while loop.");
 
                     difference = CalculateChange(comparingFromClose, comparingToClose);
-                    String n = "s";
                 }
                 String percentageChange = DoubleToPercentageString(difference);
                 return percentageChange;
@@ -430,7 +431,11 @@ namespace WebCalculator.Controllers
             model.IWN = percentChange(IWN);
             model.IWM = percentChange(IWM);
             model.IWO = percentChange(IWO);
+            ViewBag.up = upperInt;
             Console.WriteLine(model.IVE + " " + model.IVV + " " + model.IVW + " " + model.IJJ + " " + model.IJH + " " + model.IJK + " " + model.IWN + " " + model.IWM + " " + model.IWO);
+            ViewBag.low = lowerInt;
+            ViewBag.up = upperInt;
+            ViewBag.hasClicked = "true";
             return View("Index", model);
         }
 
