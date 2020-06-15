@@ -37,7 +37,7 @@
         #slider-range {
             margin: 0 auto;
             margin-top: 200px;
-            width: 2000px;
+            width: 90%;
         }
 
         p {
@@ -112,6 +112,7 @@
                     localStorage.setItem('low', $("#slider-range").slider("values", 0).toString());
                 })
                 $("#lockin").click(function() {
+                    lockinStatus = "true";
                     multiple = $("#slider-range").slider("values", 1) - $("#slider-range").slider("values", 0); 
                     var maximum = 3650;
                     lower = $("#slider-range").slider('values', 0);
