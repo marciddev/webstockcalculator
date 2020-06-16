@@ -15,24 +15,47 @@
     <style>
         * {
             font-family: Verdana, Geneva, Tahoma, sans-serif;
+        
         }
-        .grid-container {
+        
+            .grid-container {
             display: grid;
             grid-template-columns: min-content min-content min-content;
             margin-top: 70px;
             margin-left: 37%;
             width: 100%;
+            }
+
+            .grid-item {
+                background-color: rgba(255, 255, 255, 0.8);
+                width: 200px;
+                border: 2px solid rgba(0, 0, 0, 0.8);
+                padding: 20px;
+                font-size: 30px;
+                text-align: center;
+                margin-top: 25px;
+            }
+        @@media only screen and (max-width: 1600px){
+
+            .grid-container {
+            display: grid;
+            grid-template-columns: min-content min-content min-content;
+            margin-top: 70px;
+            margin-left: 25%;
+            width: 100%;
+            }
+
+            .grid-item {
+                background-color: rgba(255, 255, 255, 0.8);
+                width: 200px;
+                border: 2px solid rgba(0, 0, 0, 0.8);
+                padding: 20px;
+                font-size: 30px;
+                text-align: center;
+                margin-top: 25px;
+            }
         }
 
-        .grid-item {
-            background-color: rgba(255, 255, 255, 0.8);
-            width: 200px;
-            border: 2px solid rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            font-size: 30px;
-            text-align: center;
-            margin-top: 25px;
-        }
         #slider-range {
             margin: 0 auto;
             margin-top: 200px;
